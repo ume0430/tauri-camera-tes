@@ -12,13 +12,14 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-// CameraService をたたくコマンドの形だけ用意
+// CameraService をたたくコマンド
 #[tauri::command]
 fn take_photo(state: tauri::State<'_, AppState>) -> Result<(Vec<u8>, String), String> {
     let image: ImageData = state
         .camera
         .take_photo()
-        .map_err(|e| e.to_string())?;
+        // ★ ここを Debug 表示にする
+        .map_err(|e| format!("{:?}", e))?;
 
     Ok((image.bytes, image.mime_type))
 }
@@ -28,9 +29,8 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .manage(AppState {
-            // camera_service_proto 側に new() がある前提。
-            // もし default() しかなければ DesktopCameraService::default() に変える。
-            camera: DesktopCameraService::new(),
+            // ★ ここにデバイスやパスを渡す（例：/dev/video0）
+            camera: DesktopCameraService::new("/dev/video0".into()),
         })
         .invoke_handler(tauri::generate_handler![
             greet,
