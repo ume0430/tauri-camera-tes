@@ -1,12 +1,35 @@
-<section class="row">
-  <div>
-    <h2>カメラテスト</h2>
-    <button id="take-photo-button">写真を撮る</button>
-    <p id="photo-info"></p>
-    <img
-      id="photo-img"
-      alt="camera photo preview"
-      style="max-width: 100%; border: 1px solid #ccc; margin-top: 8px;"
-    />
-  </div>
-</section>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カメラテスト</title>
+
+    <!-- あれば使う（無ければ消してOK） -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <section class="row">
+      <div>
+        <h2>カメラテスト</h2>
+
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button id="take-photo-button">写真を撮る</button>
+          <button id="save-photo-button">保存</button>
+        </div>
+
+        <p id="photo-info" style="margin-top: 8px;"></p>
+
+        <img
+          id="photo-img"
+          alt="camera photo preview"
+          style="max-width: 100%; border: 1px solid #ccc; margin-top: 8px;"
+        />
+      </div>
+    </section>
+
+    <!-- main.js があるなら読む（重要） -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
